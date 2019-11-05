@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from './user.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -6,32 +9,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  userlist;
+  profileForm:FormGroup
+  constructor(private fb:FormBuilder,private usvs:UserService) {
+    
+  }
+  ngOnInit() {
+    this.profileForm=this.fb.group({
+      username:['',Validators.required],
+      password:['',Validators.required],
+      email:['',Validators.required],
+      dateofbirth:['',Validators.required],
+      weight:['',Validators.required],
+      height:['',Validators.required],
+    }),
+
+    this.userlist=this.usvs.userlist
+    // .pipe(map(x=>{
+    //   if(x instanceof Array){
+    //     x.map(y=>{
+    //       let z=this.findage(y.dateofbirth);
+    //       return {...y,age:z};
+    //     })
+    //   }
+    // }));;
   }
 
-  ngOnInit() {
+  onSubmit(){
+    this.usvs.addUser(this.profileForm.value);
   }
+  findage(dateofbirth:string){
+    let n=new Date();
+    let y=new Date(dateofbirth)
+    return (n.getFullYear()-y.getFullYear());
+  }
+
+  // getUserList(){
+  //   this.userlist=this.usvs.userlist;
+  // }
   // add back when alpha.4 is out
   // navigate(item) {
   //   this.router.navigate(['/list', JSON.stringify(item)]);

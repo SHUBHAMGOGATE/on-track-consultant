@@ -12,14 +12,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
+      title: 'Diet',
+      url: '/diet',
+      icon: 'pizza'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'User',
+      url: '/user',
+      icon: 'person-add'
     }
   ];
 

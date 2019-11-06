@@ -12,9 +12,9 @@
 <ion-content>
   <form [formGroup]="dietForm">
     <ion-item>
-        <ion-label position="floating">User Name</ion-label>
-        <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="changeUser($event)" formControlName="username">
-            <ion-select-option *ngFor="let item of userlist|async" [value]="item.username"><pre>{{item.username}}</pre></ion-select-option>
+        <ion-label position="floating">Email</ion-label>
+        <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="changeUser($event)" formControlName="email">
+            <ion-select-option *ngFor="let item of userlist|async" [value]="item.email"><pre>{{item.email}}</pre></ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item>

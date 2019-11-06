@@ -13,7 +13,7 @@ export class HomePage {
   constructor(private fb:FormBuilder, private usvs:UserService) {
     this.userlist=this.usvs.userlist;
     this.dietForm=this.fb.group({
-      username:['',Validators.required],
+      email:['',Validators.required],
       from:['',Validators.required],
       to:['',Validators.required],
       schedule:this.fb.array([
